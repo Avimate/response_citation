@@ -9,12 +9,12 @@ try:
     # Try to get from Streamlit secrets (for deployment)
     COHERE_API_KEY = st.secrets["COHERE_API_KEY"]
     TAVILY_API_KEY = st.secrets["TAVILY_API_KEY"]
-    COHERE_MODEL = st.secrets.get("COHERE_MODEL", "command-r")
+    COHERE_MODEL = st.secrets.get("COHERE_MODEL", "command-a-03-2025")
 except:
     # Fallback to environment variables or hardcoded (for local development)
     COHERE_API_KEY = os.getenv("COHERE_API_KEY", "Hx1jh8VxQfz0fj2IDCdbhG8RH913X8ifDoCnAVjz")
     TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "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")
-    COHERE_MODEL = os.getenv("COHERE_MODEL", "command-r")
+    COHERE_MODEL = os.getenv("COHERE_MODEL", "command-a-03-2025")
 
 # --------------------------
 # Initialize API Clients
