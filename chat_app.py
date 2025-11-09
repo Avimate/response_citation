@@ -16,7 +16,6 @@ except:
     TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "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")
     COHERE_MODEL = os.getenv("COHERE_MODEL", "command-r")
 
-
 # --------------------------
 # Initialize API Clients
 # --------------------------
@@ -30,7 +29,7 @@ def init_clients():
         raise
 
     if not COHERE_API_KEY or not TAVILY_API_KEY:
-        st.error(" Missing API keys. Please check your configuration.")
+        st.error("Missing API keys. Please check your configuration.")
         st.info("For local development: Set COHERE_API_KEY and TAVILY_API_KEY in your environment")
         st.info("For deployment: Add them to Streamlit Cloud secrets")
         st.stop()
@@ -42,7 +41,6 @@ def init_clients():
     except Exception as e:
         st.error(f"Failed to initialize API clients: {str(e)}")
         return None, None
-
 
 # --------------------------
 # Main Research Logic
@@ -88,15 +86,14 @@ def search_and_answer(question, co_client, tv_client):
 
     except Exception as e:
         traceback.print_exc()
-        return f" Error: {e}", []
-
+        return f"Error: {e}", []
 
 # --------------------------
 # Streamlit App
 # --------------------------
 def main():
     st.set_page_config(page_title="AI Research Assistant", layout="wide")
-    st.title(" AI Research Assistant")
+    st.title("AI Research Assistant")
     st.write("Ask a question — I'll search the web and generate an answer with citations.")
 
     if "history" not in st.session_state:
@@ -124,15 +121,14 @@ def main():
         with st.chat_message("assistant"):
             st.write(item['answer'])
             if item["sources"]:
-                with st.expander(" Sources"):
+                with st.expander("Sources"):
                     for j, s in enumerate(item["sources"], start=1):
                         st.markdown(f"**[{j}] {s.get('title', 'No title')}**")
                         if s.get("url"):
-                            st.markdown(f" {s['url']}")
+                            st.markdown(f"Link: {s['url']}")
                         if s.get("content"):
-                            st.markdown(f" {s.get('content', '')[:200]}...")
+                            st.markdown(f"{s.get('content', '')[:200]}...")
                         st.markdown("---")
-
 
 if __name__ == "__main__":
     main()
